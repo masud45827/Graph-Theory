@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef     long long    ll;
+typedef     vector<int> vi;
+typedef     vector<long long> vl;
+typedef     pair<int,int>pi;
+typedef     pair<long long,long long>pl;
+#define F   first
+#define S   second
+#define pb  push_back
+#define     all(x)      x.begin() , x.end()
+#define mp  make_pair
+#define     REP(i,a,b) for(i=a;i<=b;i++)
+#define     mem(a)      memset(a , 0 ,sizeof a)
+#define     memn(a)     memset(a , -1 ,sizeof a)
+bool visit[1000];
+int level[1000];
+ vector<int>g[2000];
+int main()
+{
+ int n,i,j,k,m,u,v,x,c;
+ memn(level);
+ cin>>n>>m;
+  vector<int>g[n+2];
+  REP(i,1,n)
+  {
+    cin>>u>>v>>c;
+    g[u][v].push_back(c);
+    g[v][u].push_back(c);
+  }
+  queue<int>q;
+  q.push(1);
+   int distance[]=infinity;
+   while(q.size()!=0)
+   {
+    u=q.front();
+    q.pop();
+     cout<<u<<" ";
+     visit[u]=true;
+  
+     REP(j,0,g[u].size()-1)
+     {
+        v=g[u][j];
+       if(level[v]==-1)
+       {
+        level[v]=level[u]+1;
+       }
+       if(!visit[v])
+        {
+          q.push(v);
+          visit[v]=true;
+        }
+     }
+   }
+   int t;
+   cin>>t;
+   while(t--){
+   cin>>x;
+   cout<<level[x]<<endl;
+ }
+
+
+}
