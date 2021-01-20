@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+ const int N=(int)1e6+3;
+struct node
+{
+   int  cost,u;
+   node(int u1,int cost1)
+   {
+    u=u1;
+    cost=cost1;
+   }
+ bool operator < ( const node& p ) const {      return cost > p.cost;   }
+};
+
+void diasktra(vector<int>g[],vector<int>cost[],int source,int n,int m)
+{
+  int i;
+  int distance[n+2];
+  for(i=1;i<=n;i++)
+  {
+    distance[i]=N;
+  }
+   priority_queue<node>q;
+      q.push(node(source,0));
+   distance[source]=0;
+   while(!q.empty())
+   {
+      node top=q.top();
+      q.pop(); 
+     int u=top.u;
+      for(i=0;i<g[u].size();i++)
+      {
+       int v=g[u][i];
+        if(distance[u]+cost[u][i]<distance[v])
+        {
+          distance[v]=distance[u]+cost[u][i];
+          q.push(node(v,distance[v]));
+        }
+      }
+
+   }
+   for(i=1;i<=m;i++)
+    {
+      cout<<i<<" "<<distance[i]<<endl;
+    }
+   {
+
+   }
+}
+int main()
+{
+  vector<int>g[1000],cost[1000];
+  int i,n,j,x,y,u,v,w,m;
+  cin>>n>>m;
+  for(i=0;i<n;i++)
+  {
+     cin>>u>>v>>w;
+     g[u].push_back(v);
+     g[v].push_back(u);
+     cost[u].push_back(w);
+     cost[v].push_back(w);
+  }
+  int source;
+  cin>>source;
+  diasktra(g,cost,source,n,m);
+
+
+
+
+}
